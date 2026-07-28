@@ -1,0 +1,25 @@
+[project]
+name = "arboviruses-series-forecasting"
+version = "0.1.0"
+description = "Dengue forecasting models for MSc research (Brazil)"
+readme = "README.md"
+authors = [
+    { name = "Caio Olúbini", email = "caio.olubini@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=3.0.5",
+    "pyarrow>=25.0.0",
+    "pyyaml>=6.0.3",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "pytest>=8.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.17,<0.12.0"]
+build-backend = "uv_build"

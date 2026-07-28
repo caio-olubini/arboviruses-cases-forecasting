@@ -1,0 +1,43 @@
+# Dengue forecasting — project config
+# Phase 1: unimodal statistical baselines (MSc / article)
+
+project:
+  name: arboviruses-series-forecasting
+  description: Multimodal neural forecasting of dengue in Brazil
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  external: data/external
+  notebooks: notebooks
+  figures: docs/figures
+
+# Aggregation (UF × epidemiological week)
+aggregation:
+  spatial_unit: uf          # 27 federative units
+  temporal_unit: ew         # epidemiological week
+  season_boundary:          # EW41 → EW40
+    start: 41
+    end: 40
+  date_field: DT_SIN_PRI    # symptom onset
+  case_definition: probable # notified − discarded
+  window:
+    start: "2010-EW01"
+    end: last_complete_week
+  right_censor_weeks: 12
+
+# Evaluation protocol
+evaluation:
+  # Open decision: point forecasts → MAE on log1p; distributions → CRPS
+  forecast_type: point      # point | distribution
+  training_window_years: 6
+  horizons: [4, 12]         # weeks (4 = operational; adjust second to model target)
+  held_out_seasons: 2
+  metrics:
+    headline: mae_log1p     # mae_log1p | crps
+    skill_baseline: seasonal_naive
+
+# Data sources
+data:
+  sinan:
+    path: data/raw/SINAN_dengue_cases.parquet
