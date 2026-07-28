@@ -26,6 +26,17 @@ def sunday_of_epiweek(year: int, week: int) -> pd.Timestamp:
     return pd.Timestamp(week1_sunday + timedelta(weeks=week - 1))
 
 
+def epiweek_of(week_start: pd.Series) -> pd.DataFrame:
+    """Map Sunday week-starts to CDC ``ew_year`` and ``ew`` (1–53)."""
+    week_start = pd.to_datetime(week_start)
+    # Epi-year follows the Thursday inside the Sunday-start week.
+    thursday = week_start + pd.Timedelta(days=4)
+    ew_year = thursday.dt.year
+    week1_sunday = ew_year.map(lambda year: sunday_of_epiweek(int(year), 1))
+    ew = ((week_start - week1_sunday).dt.days // 7) + 1
+    return pd.DataFrame({"ew_year": ew_year.to_numpy(), "ew": ew.to_numpy()})
+
+
 def clip_to_study_window(weekly: pd.DataFrame, *, start: str) -> pd.DataFrame:
     year, week = parse_epiweek_label(start)
     window_start = sunday_of_epiweek(year, week)
