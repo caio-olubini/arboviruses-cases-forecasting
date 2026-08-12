@@ -21,14 +21,21 @@ wheels/
 .idea/
 .vscode/
 
-# Local / large data (keep .gitkeep; track small samples if needed)
+# Local / large extracts (keep directories; track model-ready panel + small aux)
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/dengue_uf_ew.parquet
 data/external/*
 !data/external/.gitkeep
+!data/external/ibge_uf_population_2024.csv
+
+# Parquet by default; allow the few files needed for a clean clone
 *.parquet
+!data/processed/dengue_uf_ew.parquet
+!results/baseline_forecasts.parquet
+!results/baseline_scores.parquet
 
 # Figures / outputs
 docs/figures/*

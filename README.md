@@ -41,22 +41,37 @@ Roadmap: [`docs/statistical-baselines-roadmap.md`](docs/statistical-baselines-ro
 
 ## Setup
 
-Requires [uv](https://docs.astral.sh/uv/) and Python ≥ 3.12.
+Requires [uv](https://docs.astral.sh/uv/) and Python ≥ 3.12 (pinned in `.python-version`). Dependencies are locked in `uv.lock`.
 
 ```bash
-uv sync
+uv sync --frozen
 uv run pytest
 ```
+
+That is enough for a clean clone: the processed panel, IBGE population CSV, and baseline score/forecast tables are tracked. Tests include integrity checks on those artifacts.
 
 Notebooks (optional Jupyter stack from the `dev` group):
 
 ```bash
-uv sync --group dev
+uv sync --frozen --group dev
 uv run jupyter notebook notebooks/
 ```
 
-Raw SINAN extract and the processed panel live under `data/` (see tree below). Rebuild the panel via the epidemiological pipeline in `src/.../data/epidemiological/`.
+### Data layout
 
+| Path | In git? | Role |
+| --- | --- | --- |
+| `data/processed/dengue_uf_ew.parquet` | yes | Forecasting panel (UF × EW) |
+| `data/external/ibge_uf_population_2024.csv` | yes | Incidence denominators for figures |
+| `results/baseline_*.parquet` | yes | Phase 1 forecast/score tables |
+| `data/raw/SINAN_dengue_cases.parquet` | no | Local SINAN snapshot (gitignored) |
+
+To rebuild the panel from a local extract:
+
+```bash
+# place extract at data/raw/SINAN_dengue_cases.parquet (see config.yml)
+uv run build-dengue-panel
+```
 ---
 
 ## Directory tree

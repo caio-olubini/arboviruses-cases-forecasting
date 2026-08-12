@@ -114,10 +114,18 @@ def test_build_dengue_uf_ew_series_on_tiny_parquet(tmp_path: Path) -> None:
         path, window_start="2010-EW01", right_censor_weeks=1
     )
 
-    assert list(series.columns) == ["uf", "week_start", "cases"]
+    assert list(series.columns) == [
+        "uf",
+        "week_start",
+        "cases",
+        "ew_year",
+        "ew",
+        "log10_cases",
+    ]
     assert series["week_start"].max() == pd.Timestamp("2010-01-10")
     assert series.loc[series["week_start"] == "2010-01-03", "cases"].item() == 10
     assert series["cases"].sum() == 14
+    assert series.loc[series["week_start"] == "2010-01-03", "ew"].item() == 1
 
 
 def test_sunday_of_epiweek_rejects_week_zero() -> None:
