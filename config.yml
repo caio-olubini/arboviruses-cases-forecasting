@@ -41,3 +41,7 @@ evaluation:
 data:
   sinan:
     path: data/raw/SINAN_dengue_cases.parquet
+  ibge_population:
+    path: data/external/ibge_uf_population_2024.csv
+    reference_date: "2024-07-01"
+    source: "IBGE SIDRA table 6579"

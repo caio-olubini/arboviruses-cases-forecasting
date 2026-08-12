@@ -12,6 +12,7 @@ dependencies = [
     "pandas>=3.0.5",
     "pyarrow>=25.0.0",
     "pyyaml>=6.0.3",
+    "statsmodels>=0.14.6",
 ]
 
 [dependency-groups]

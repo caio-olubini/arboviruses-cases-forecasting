@@ -1,0 +1,18 @@
+---
+description: >-
+  Apply Caio's Nature-grade scientific writing skill whenever drafting or
+  revising academic prose (papers, abstracts, methods, discussion, manuscript
+  sections, paper-facing docs).
+globs: docs/**/*.{md,qmd,tex,bib},**/*.{tex,qmd,bib},**/paper*/**/*,**/manuscript*/**/*
+alwaysApply: false
+---
+
+# Scientific writing
+
+Before drafting or revising academic prose in this project, read and follow
+`.cursor/skills/scientific-writing/SKILL.md`.
+
+- Style and integrity contract only — Caio owns ideas, results, and claims
+- Point-first paragraphs; no AI-slop blocklist phrases; precise hedges only
+- Methods: extractable tables/equations first; never fabricate citations
+- Discussion/Intro framing: propose for Caio to own — do not assert unendorsed claims
